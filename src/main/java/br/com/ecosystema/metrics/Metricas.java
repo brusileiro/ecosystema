@@ -1,4 +1,8 @@
 package br.com.ecosystema.metrics;
 
-public class Metricas {
-}
+public record Metricas(
+        long dia,
+        double fatorClima,
+        double biomassaPlantas,
+        double nutrientesSolo
+) {}
