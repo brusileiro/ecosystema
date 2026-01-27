@@ -1,22 +1,37 @@
 package br.com.ecosystema.domain;
 
 public class Parametros {
+    //Parametros Plantas
     double taxaBaseCrescimentoPlantas;
     double KLimitadorNutrientes;
     double custoNutrientePorPlanta;
+
+
+    //Parametros animais
+    double energiaMinimaParaViver;
+    double energiaMinimaReproducao;
+    double custoEnergiaReproducao;
+
+    //Parametros Herbivoros
     double consumoPlantasPorHerbivoroDia;
     double eficienciaEnergiaPorBiomassa;
     double custoEnergiaDiarioHerbivoro;
     double energiaInicialHerbivoro;
     int idadeMaximaHerbivoro;
-    double energiaMinimaParaViver;
+    double chanceReproducaoHerbivo;
+
+    //Parametros Carnivoros
     double custoEnergiaDiarioCarnivoro;
     double energiaInicialCarnivoro;
     int idadeMaximaCarnivoro;
-
     int tentativasCacaPorCarnivoroDia;
     double chanceSucessoCaca;
     double ganhoEnergiaPorHerbivoro;
+    double chanceReproducaoCarnivoro;
+
+    //Parametros decomposição
+    double taxaDecomposicaoCarcacas;
+    double nutrientesPorCacaca;
 
     public double getTaxaBaseCrescimentoPlantas() {
         return taxaBaseCrescimentoPlantas;
@@ -152,5 +167,53 @@ public class Parametros {
 
     public void setCustoEnergiaDiarioHerbivoro(double custoEnergiaDiarioHerbivoro) {
         this.custoEnergiaDiarioHerbivoro = custoEnergiaDiarioHerbivoro;
+    }
+
+    public double getTaxaDecomposicaoCarcacas() {
+        return taxaDecomposicaoCarcacas;
+    }
+
+    public void setTaxaDecomposicaoCarcacas(double taxaDecomposicaoCarcacas) {
+        this.taxaDecomposicaoCarcacas = taxaDecomposicaoCarcacas;
+    }
+
+    public double getNutrientesPorCacaca() {
+        return nutrientesPorCacaca;
+    }
+
+    public void setNutrientesPorCacaca(double nutrientesPorCacaca) {
+        this.nutrientesPorCacaca = nutrientesPorCacaca;
+    }
+
+    public double getCustoEnergiaReproducao() {
+        return custoEnergiaReproducao;
+    }
+
+    public void setCustoEnergiaReproducao(double custoEnergiaReproducao) {
+        this.custoEnergiaReproducao = custoEnergiaReproducao;
+    }
+
+    public double getEnergiaMinimaReproducao() {
+        return energiaMinimaReproducao;
+    }
+
+    public void setEnergiaMinimaReproducao(double energiaMinimaReproducao) {
+        this.energiaMinimaReproducao = energiaMinimaReproducao;
+    }
+
+    public double getChanceReproducaoCarnivoro() {
+        return chanceReproducaoCarnivoro;
+    }
+
+    public void setChanceReproducaoCarnivoro(double chanceReproducaoCarnivoro) {
+        this.chanceReproducaoCarnivoro = chanceReproducaoCarnivoro;
+    }
+
+    public double getChanceReproducaoHerbivo() {
+        return chanceReproducaoHerbivo;
+    }
+
+    public void setChanceReproducaoHerbivo(double chanceReproducaoHerbivo) {
+        this.chanceReproducaoHerbivo = chanceReproducaoHerbivo;
     }
 }

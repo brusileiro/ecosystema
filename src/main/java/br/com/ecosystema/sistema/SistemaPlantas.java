@@ -12,19 +12,28 @@ public class SistemaPlantas implements Sistema {
         double nutrientes = mundo.getNutrientesSolo();
         double plantas = mundo.getBiomassaPlantas();
 
-        double potencial = parametros.getTaxaBaseCrescimentoPlantas() * fatorClima;
-        double limitador = nutrientes / (nutrientes + parametros.getKLimitadorNutrientes());
-        double crescimentoTeorico = potencial * limitador;
-        double custoNutrientes = crescimentoTeorico * parametros.getCustoNutrientePorPlanta();
-        double crescimentoReal = crescimentoTeorico;
+        double taxaBase = parametros.getTaxaBaseCrescimentoPlantas();
+        double k = parametros.getKLimitadorNutrientes();
+        double custoPorPlanta = parametros.getCustoNutrientePorPlanta();
 
-        if (custoNutrientes > nutrientes) {
-            crescimentoReal = nutrientes / parametros.getCustoNutrientePorPlanta();
+        if (nutrientes <= 0) {
+            return;
+        }
+
+        double potencial = taxaBase * fatorClima;
+
+        double limitador = nutrientes / (nutrientes + k);
+        double crescimentoTeorico = potencial * limitador;
+
+        double custoNutrientes = crescimentoTeorico * custoPorPlanta;
+
+        double crescimentoReal = crescimentoTeorico;
+        if (custoPorPlanta > 0 && custoNutrientes > nutrientes) {
+            crescimentoReal = nutrientes / custoPorPlanta;
             custoNutrientes = nutrientes;
         }
 
         mundo.setBiomassaPlantas(plantas + crescimentoReal);
-        mundo.setNutrientesSolo(nutrientes -= custoNutrientes);
-
+        mundo.setNutrientesSolo(nutrientes - custoNutrientes);
     }
 }

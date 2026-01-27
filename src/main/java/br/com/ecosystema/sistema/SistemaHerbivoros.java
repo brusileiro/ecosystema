@@ -4,6 +4,7 @@ import br.com.ecosystema.domain.Herbivoro;
 import br.com.ecosystema.domain.Mundo;
 import br.com.ecosystema.domain.Parametros;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -13,6 +14,8 @@ public class SistemaHerbivoros implements Sistema {
     public void executar(Mundo mundo, Parametros parametros, Random rng) {
         List<Herbivoro> herbivoros = mundo.getHerbivoros();
         if (herbivoros == null || herbivoros.isEmpty()) return;
+
+        List<Herbivoro> nascimentos = new ArrayList<>();
 
         Iterator<Herbivoro> it = herbivoros.iterator();
         while (it.hasNext()) {
@@ -34,6 +37,23 @@ public class SistemaHerbivoros implements Sistema {
 
             h.setEnergia(h.getEnergia() - parametros.getCustoEnergiaDiario());
 
+            // Reprodução (herbívoros)
+            if (h.getEnergia() >= parametros.getEnergiaMinimaReproducao()) {
+                if (rng.nextDouble() < parametros.getChanceReproducaoHerbivo()) {
+
+                    // paga custo
+                    h.setEnergia(h.getEnergia() - parametros.getCustoEnergiaReproducao());
+
+                    // nasce filhote
+                    Herbivoro filhote = new Herbivoro(
+                            parametros.getEnergiaInicialHerbivoro(),
+                            0
+                    );
+                    nascimentos.add(filhote);
+                }
+            }
+
+
             boolean morreuPorEnergia = h.getEnergia() <= parametros.getEnergiaMinimaParaViverHerbivoro();
             boolean morreuPorIdade = h.getIdade() >= parametros.getIdadeMaximaHerbivoro();
 
@@ -42,6 +62,9 @@ public class SistemaHerbivoros implements Sistema {
                 it.remove();
             }
         }
+
+        herbivoros.addAll(nascimentos);
+
 
 
     }

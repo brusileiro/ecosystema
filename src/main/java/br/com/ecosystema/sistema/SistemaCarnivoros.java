@@ -5,6 +5,7 @@ import br.com.ecosystema.domain.Herbivoro;
 import br.com.ecosystema.domain.Mundo;
 import br.com.ecosystema.domain.Parametros;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -15,6 +16,7 @@ public class SistemaCarnivoros implements Sistema {
     public void executar(Mundo mundo, Parametros parametros, Random rng) {
         List<Carnivoro> carnivoros = mundo.getCarnivoros();
         List<Herbivoro> herbivoros = mundo.getHerbivoros();
+        List<Carnivoro> nascimentos = new ArrayList<>();
 
         if (carnivoros == null || carnivoros.isEmpty()) return;
 
@@ -51,6 +53,22 @@ public class SistemaCarnivoros implements Sistema {
                     c.getEnergia() - parametros.getCustoEnergiaDiarioCarnivoro()
             );
 
+            // Reprodução (herbívoros)
+            if (c.getEnergia() >= parametros.getEnergiaMinimaReproducao()) {
+                if (rng.nextDouble() < parametros.getChanceReproducaoCarnivoro()) {
+
+                    // paga custo
+                    c.setEnergia(c.getEnergia() - parametros.getCustoEnergiaReproducao());
+
+                    // nasce filhote
+                    Carnivoro filhote = new Carnivoro(
+                            parametros.getEnergiaInicialHerbivoro(),
+                            0
+                    );
+                    nascimentos.add(filhote);
+                }
+            }
+
             // 4) morte
             boolean morreuPorEnergia =
                     c.getEnergia() <= parametros.getEnergiaMinimaParaViver();
@@ -63,5 +81,7 @@ public class SistemaCarnivoros implements Sistema {
                 it.remove();
             }
         }
+
+        carnivoros.addAll(nascimentos);
     }
 }

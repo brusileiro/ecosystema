@@ -6,5 +6,6 @@ public record Metricas(
         double biomassaPlantas,
         double nutrientesSolo,
         int totalHerbivoros,
-        int totalCarnivoros
+        int totalCarnivoros,
+        double carcacas
 ) {}

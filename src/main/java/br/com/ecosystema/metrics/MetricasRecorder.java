@@ -28,6 +28,7 @@ public class MetricasRecorder {
                         + " | Nutrientes: " + String.format("%.2f", m.nutrientesSolo())
                         + " | Herbivoros: " + String.format("%d", m.totalHerbivoros())
                         + " | Carnivoros: " + String.format("%d", m.totalCarnivoros())
+                        + " | Carcaças: " + String.format("%.2f", m.carcacas())
         );
     }
 }

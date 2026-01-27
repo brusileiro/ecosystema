@@ -19,6 +19,7 @@ public class Simulacao {
         Sistema clima = new SistemaClima();
         Sistema herbivoros = new SistemaHerbivoros();
         Sistema carnivoros = new SistemaCarnivoros();
+        Sistema decomposicao = new SistemaDecomposicao();
         Mundo mundo = new Mundo();
         Parametros parametros = new Parametros();
         Random rng = new Random(42);
@@ -26,14 +27,15 @@ public class Simulacao {
         List<Metricas> listaMetricas = new ArrayList<>();
 
         MetricasRecorder recorder = new MetricasRecorder(listaMetricas);
-        int dias = 100;
+        int dias = 200;
 
         sistemas.add(clima);
         sistemas.add(plantas);
         sistemas.add(herbivoros);
         sistemas.add(carnivoros);
+        sistemas.add(decomposicao);
 
-        mundo.setBiomassaPlantas(100.0);
+        mundo.setBiomassaPlantas(5000);
         mundo.setNutrientesSolo(500.0);
 
         parametros.setTaxaBaseCrescimentoPlantas(10);
@@ -46,6 +48,13 @@ public class Simulacao {
         parametros.setEnergiaInicialHerbivoro(5);
         parametros.setEnergiaMinimaParaViverHerbivoro(0);
         parametros.setIdadeMaximaHerbivoro(10000);
+        parametros.setChanceReproducaoHerbivo(0.15);
+
+        parametros.setEnergiaMinimaReproducao(12);
+        parametros.setCustoEnergiaReproducao(6);
+
+        parametros.setTaxaDecomposicaoCarcacas(0.2);
+        parametros.setNutrientesPorCacaca(5);
 
         int quantidadeInicialHerbivoros = 100;
         for (int i = 0; i < quantidadeInicialHerbivoros; i++) {
@@ -56,12 +65,13 @@ public class Simulacao {
             mundo.getHerbivoros().add(h);
         }
 
-        parametros.setTentativasCacaPorCarnivoroDia(1);
-        parametros.setChanceSucessoCaca(0.25);
+        parametros.setTentativasCacaPorCarnivoroDia(3);
+        parametros.setChanceSucessoCaca(0.1);
         parametros.setGanhoEnergiaPorHerbivoro(6.0);
-        parametros.setCustoEnergiaDiarioCarnivoro(0.8);
+        parametros.setCustoEnergiaDiarioCarnivoro(1);
         parametros.setEnergiaInicialCarnivoro(4);
         parametros.setIdadeMaximaCarnivoro(10000);
+        parametros.setChanceReproducaoCarnivoro(0.03);
 
         int quantidadeInicialCarnivoros = 2;
         for (int i = 0; i < quantidadeInicialCarnivoros; i++) {
@@ -85,7 +95,8 @@ public class Simulacao {
                     mundo.getBiomassaPlantas(),
                     mundo.getNutrientesSolo(),
                     mundo.getHerbivoros().size(),
-                    mundo.getCarnivoros().size()
+                    mundo.getCarnivoros().size(),
+                    mundo.getCarcacas()
             );
 
 
