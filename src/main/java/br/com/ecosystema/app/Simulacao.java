@@ -1,12 +1,12 @@
 package br.com.ecosystema.app;
 
+import br.com.ecosystema.domain.Carnivoro;
+import br.com.ecosystema.domain.Herbivoro;
 import br.com.ecosystema.domain.Mundo;
 import br.com.ecosystema.domain.Parametros;
 import br.com.ecosystema.metrics.Metricas;
 import br.com.ecosystema.metrics.MetricasRecorder;
-import br.com.ecosystema.sistema.Sistema;
-import br.com.ecosystema.sistema.SistemaClima;
-import br.com.ecosystema.sistema.SistemaPlantas;
+import br.com.ecosystema.sistema.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,16 +17,21 @@ public class Simulacao {
 
         Sistema plantas = new SistemaPlantas();
         Sistema clima = new SistemaClima();
+        Sistema herbivoros = new SistemaHerbivoros();
+        Sistema carnivoros = new SistemaCarnivoros();
         Mundo mundo = new Mundo();
         Parametros parametros = new Parametros();
         Random rng = new Random(42);
         List<Sistema> sistemas = new ArrayList<>();
         List<Metricas> listaMetricas = new ArrayList<>();
+
         MetricasRecorder recorder = new MetricasRecorder(listaMetricas);
         int dias = 100;
 
         sistemas.add(clima);
         sistemas.add(plantas);
+        sistemas.add(herbivoros);
+        sistemas.add(carnivoros);
 
         mundo.setBiomassaPlantas(100.0);
         mundo.setNutrientesSolo(500.0);
@@ -35,7 +40,41 @@ public class Simulacao {
         parametros.setKLimitadorNutrientes(20);
         parametros.setCustoNutrientePorPlanta(1);
 
+        parametros.setConsumoPlantasPorHerbivoroDia(1);
+        parametros.setEficienciaEnergiaPorBiomassa(2);
+        parametros.setCustoEnergiaDiario(0.5);
+        parametros.setEnergiaInicialHerbivoro(5);
+        parametros.setEnergiaMinimaParaViverHerbivoro(0);
+        parametros.setIdadeMaximaHerbivoro(10000);
+
+        int quantidadeInicialHerbivoros = 100;
+        for (int i = 0; i < quantidadeInicialHerbivoros; i++) {
+            Herbivoro h = new Herbivoro(
+                    parametros.getEnergiaInicialHerbivoro(),0
+            );
+
+            mundo.getHerbivoros().add(h);
+        }
+
+        parametros.setTentativasCacaPorCarnivoroDia(1);
+        parametros.setChanceSucessoCaca(0.25);
+        parametros.setGanhoEnergiaPorHerbivoro(6.0);
+        parametros.setCustoEnergiaDiarioCarnivoro(0.8);
+        parametros.setEnergiaInicialCarnivoro(4);
+        parametros.setIdadeMaximaCarnivoro(10000);
+
+        int quantidadeInicialCarnivoros = 2;
+        for (int i = 0; i < quantidadeInicialCarnivoros; i++) {
+            Carnivoro c = new Carnivoro(
+                    parametros.getEnergiaInicialHerbivoro(),0
+            );
+
+            mundo.getCarnivoros().add(c);
+        }
+
+
         CicloDiario ciclo = new CicloDiario(sistemas, mundo, parametros, rng);
+
 
         for (int i = 0; i < dias; i++) {
             ciclo.executarDia();
@@ -44,8 +83,12 @@ public class Simulacao {
                     mundo.getDiaAtual(),
                     mundo.getFatorClimaDia(),
                     mundo.getBiomassaPlantas(),
-                    mundo.getNutrientesSolo()
+                    mundo.getNutrientesSolo(),
+                    mundo.getHerbivoros().size(),
+                    mundo.getCarnivoros().size()
             );
+
+
 
             recorder.registrar(m);
             recorder.imprimirUltima();

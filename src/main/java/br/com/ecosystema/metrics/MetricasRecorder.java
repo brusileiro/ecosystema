@@ -26,6 +26,8 @@ public class MetricasRecorder {
                         + " | Clima: " + String.format("%.2f", m.fatorClima())
                         + " | Plantas: " + String.format("%.2f", m.biomassaPlantas())
                         + " | Nutrientes: " + String.format("%.2f", m.nutrientesSolo())
+                        + " | Herbivoros: " + String.format("%d", m.totalHerbivoros())
+                        + " | Carnivoros: " + String.format("%d", m.totalCarnivoros())
         );
     }
 }

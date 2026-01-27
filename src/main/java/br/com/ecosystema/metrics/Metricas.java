@@ -4,5 +4,7 @@ public record Metricas(
         long dia,
         double fatorClima,
         double biomassaPlantas,
-        double nutrientesSolo
+        double nutrientesSolo,
+        int totalHerbivoros,
+        int totalCarnivoros
 ) {}
