@@ -7,7 +7,7 @@ import br.com.ecosystema.domain.Parametros;
 import br.com.ecosystema.metrics.Metricas;
 import br.com.ecosystema.metrics.MetricasRecorder;
 import br.com.ecosystema.sistema.*;
-
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -44,14 +44,16 @@ public class Simulacao {
 
         parametros.setConsumoPlantasPorHerbivoroDia(1);
         parametros.setEficienciaEnergiaPorBiomassa(2);
-        parametros.setCustoEnergiaDiario(0.5);
+        parametros.setCustoEnergiaDiarioHerbivoro(0.5);
         parametros.setEnergiaInicialHerbivoro(5);
-        parametros.setEnergiaMinimaParaViverHerbivoro(0);
+        parametros.setEnergiaMinimaParaViver(0);
         parametros.setIdadeMaximaHerbivoro(10000);
         parametros.setChanceReproducaoHerbivo(0.15);
 
         parametros.setEnergiaMinimaReproducao(12);
         parametros.setCustoEnergiaReproducao(6);
+        parametros.setEnergiaMaxima(20.0);
+        parametros.setFatorCustoSemComer(0.5);
 
         parametros.setTaxaDecomposicaoCarcacas(0.2);
         parametros.setNutrientesPorCacaca(5);
@@ -104,6 +106,11 @@ public class Simulacao {
             recorder.registrar(m);
             recorder.imprimirUltima();
         }
+
+        Path saida = Path.of("metricas.csv");
+        recorder.exportarCsv(saida);
+        System.out.println("CSV gerado em: " + saida.toAbsolutePath());
+
 
     }
 }

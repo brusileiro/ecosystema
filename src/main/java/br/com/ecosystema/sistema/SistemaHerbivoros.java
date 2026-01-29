@@ -23,19 +23,32 @@ public class SistemaHerbivoros implements Sistema {
 
             h.setIdade(h.getIdade() + 1);
 
-            double plantasDisponiveis = mundo.getBiomassaPlantas();
-            double desejado = parametros.getConsumoPlantasPorHerbivoroDia();
+            boolean saciado = h.getEnergia() >= 0.8 * parametros.getEnergiaMaxima();
+            boolean comeuHoje = false;
 
-            double fator = 0.8 + (rng.nextDouble() * 0.4);
-            desejado *= fator;
+            if (!saciado) {
+                double plantasDisponiveis = mundo.getBiomassaPlantas();
+                double desejado = parametros.getConsumoPlantasPorHerbivoroDia();
 
-            double consumido = Math.min(desejado, plantasDisponiveis);
-            mundo.setBiomassaPlantas(plantasDisponiveis - consumido);
+                double fator = 0.8 + (rng.nextDouble() * 0.4);
+                desejado *= fator;
 
-            double ganhoEnergia = consumido * parametros.getEficienciaEnergiaPorBiomassa();
-            h.setEnergia(h.getEnergia() + ganhoEnergia);
+                double consumido = Math.min(desejado, plantasDisponiveis);
+                mundo.setBiomassaPlantas(plantasDisponiveis - consumido);
 
-            h.setEnergia(h.getEnergia() - parametros.getCustoEnergiaDiario());
+                double ganhoEnergia = consumido * parametros.getEficienciaEnergiaPorBiomassa();
+                h.setEnergia(h.getEnergia() + ganhoEnergia);
+
+                if (consumido > 0) {
+                    comeuHoje = true;
+                }
+            }
+
+            double custo = parametros.getCustoEnergiaDiarioHerbivoro();
+            if (!comeuHoje) {
+                custo *= parametros.getFatorCustoSemComer();
+            }
+            h.setEnergia(h.getEnergia() - custo);
 
             // Reprodução (herbívoros)
             if (h.getEnergia() >= parametros.getEnergiaMinimaReproducao()) {
@@ -53,8 +66,12 @@ public class SistemaHerbivoros implements Sistema {
                 }
             }
 
+            if (h.getEnergia() > parametros.getEnergiaMaxima()) {
+                h.setEnergia(parametros.getEnergiaMaxima());
+            }
 
-            boolean morreuPorEnergia = h.getEnergia() <= parametros.getEnergiaMinimaParaViverHerbivoro();
+
+            boolean morreuPorEnergia = h.getEnergia() <= parametros.getEnergiaMinimaParaViver();
             boolean morreuPorIdade = h.getIdade() >= parametros.getIdadeMaximaHerbivoro();
 
             if (morreuPorEnergia || morreuPorIdade) {

@@ -11,6 +11,8 @@ public class Parametros {
     double energiaMinimaParaViver;
     double energiaMinimaReproducao;
     double custoEnergiaReproducao;
+    double energiaMaxima;
+    double fatorCustoSemComer;
 
     //Parametros Herbivoros
     double consumoPlantasPorHerbivoroDia;
@@ -33,187 +35,192 @@ public class Parametros {
     double taxaDecomposicaoCarcacas;
     double nutrientesPorCacaca;
 
-    public double getTaxaBaseCrescimentoPlantas() {
-        return taxaBaseCrescimentoPlantas;
-    }
+    //Setters
 
     public void setTaxaBaseCrescimentoPlantas(double taxaBaseCrescimentoPlantas) {
         this.taxaBaseCrescimentoPlantas = taxaBaseCrescimentoPlantas;
-    }
-
-    public double getKLimitadorNutrientes() {
-        return KLimitadorNutrientes;
     }
 
     public void setKLimitadorNutrientes(double KLimitadorNutrientes) {
         this.KLimitadorNutrientes = KLimitadorNutrientes;
     }
 
-    public double getCustoNutrientePorPlanta() {
-        return custoNutrientePorPlanta;
-    }
-
     public void setCustoNutrientePorPlanta(double custoNutrientePorPlanta) {
         this.custoNutrientePorPlanta = custoNutrientePorPlanta;
-    }
-
-    public double getConsumoPlantasPorHerbivoroDia() {
-        return consumoPlantasPorHerbivoroDia;
-    }
-
-    public void setConsumoPlantasPorHerbivoroDia(double consumoPlantasPorHerbivoroDia) {
-        this.consumoPlantasPorHerbivoroDia = consumoPlantasPorHerbivoroDia;
-    }
-
-    public double getEnergiaMinimaParaViverHerbivoro() {
-        return energiaMinimaParaViver;
-    }
-
-    public void setEnergiaMinimaParaViverHerbivoro(double energiaMinimaParaViverHerbivoro) {
-        this.energiaMinimaParaViver = energiaMinimaParaViverHerbivoro;
-    }
-
-    public int getIdadeMaximaHerbivoro() {
-        return idadeMaximaHerbivoro;
-    }
-
-    public void setIdadeMaximaHerbivoro(int idadeMaximaHerbivoro) {
-        this.idadeMaximaHerbivoro = idadeMaximaHerbivoro;
-    }
-
-    public double getEnergiaInicialHerbivoro() {
-        return energiaInicialHerbivoro;
-    }
-
-    public void setEnergiaInicialHerbivoro(double energiaInicialHerbivoro) {
-        this.energiaInicialHerbivoro = energiaInicialHerbivoro;
-    }
-
-    public double getCustoEnergiaDiario() {
-        return custoEnergiaDiarioHerbivoro;
-    }
-
-    public void setCustoEnergiaDiario(double custoEnergiaDiario) {
-        this.custoEnergiaDiarioHerbivoro = custoEnergiaDiario;
-    }
-
-    public double getEficienciaEnergiaPorBiomassa() {
-        return eficienciaEnergiaPorBiomassa;
-    }
-
-    public void setEficienciaEnergiaPorBiomassa(double eficienciaEnergiaPorBiomassa) {
-        this.eficienciaEnergiaPorBiomassa = eficienciaEnergiaPorBiomassa;
-    }
-
-    public double getGanhoEnergiaPorHerbivoro() {
-        return ganhoEnergiaPorHerbivoro;
-    }
-
-    public void setGanhoEnergiaPorHerbivoro(double ganhoEnergiaPorHerbivoro) {
-        this.ganhoEnergiaPorHerbivoro = ganhoEnergiaPorHerbivoro;
-    }
-
-    public double getChanceSucessoCaca() {
-        return chanceSucessoCaca;
-    }
-
-    public void setChanceSucessoCaca(double chanceSucessoCaca) {
-        this.chanceSucessoCaca = chanceSucessoCaca;
-    }
-
-    public int getTentativasCacaPorCarnivoroDia() {
-        return tentativasCacaPorCarnivoroDia;
-    }
-
-    public void setTentativasCacaPorCarnivoroDia(int tentativasCacaPorCarnivoroDia) {
-        this.tentativasCacaPorCarnivoroDia = tentativasCacaPorCarnivoroDia;
-    }
-
-    public int getIdadeMaximaCarnivoro() {
-        return idadeMaximaCarnivoro;
-    }
-
-    public void setIdadeMaximaCarnivoro(int idadeMaximaCarnivoro) {
-        this.idadeMaximaCarnivoro = idadeMaximaCarnivoro;
-    }
-
-    public double getEnergiaInicialCarnivoro() {
-        return energiaInicialCarnivoro;
-    }
-
-    public void setEnergiaInicialCarnivoro(double energiaInicialCarnivoro) {
-        this.energiaInicialCarnivoro = energiaInicialCarnivoro;
-    }
-
-    public double getCustoEnergiaDiarioCarnivoro() {
-        return custoEnergiaDiarioCarnivoro;
-    }
-
-    public void setCustoEnergiaDiarioCarnivoro(double custoEnergiaDiarioCarnivoro) {
-        this.custoEnergiaDiarioCarnivoro = custoEnergiaDiarioCarnivoro;
-    }
-
-    public double getEnergiaMinimaParaViver() {
-        return energiaMinimaParaViver;
     }
 
     public void setEnergiaMinimaParaViver(double energiaMinimaParaViver) {
         this.energiaMinimaParaViver = energiaMinimaParaViver;
     }
 
-    public double getCustoEnergiaDiarioHerbivoro() {
-        return custoEnergiaDiarioHerbivoro;
-    }
-
-    public void setCustoEnergiaDiarioHerbivoro(double custoEnergiaDiarioHerbivoro) {
-        this.custoEnergiaDiarioHerbivoro = custoEnergiaDiarioHerbivoro;
-    }
-
-    public double getTaxaDecomposicaoCarcacas() {
-        return taxaDecomposicaoCarcacas;
-    }
-
-    public void setTaxaDecomposicaoCarcacas(double taxaDecomposicaoCarcacas) {
-        this.taxaDecomposicaoCarcacas = taxaDecomposicaoCarcacas;
-    }
-
-    public double getNutrientesPorCacaca() {
-        return nutrientesPorCacaca;
-    }
-
-    public void setNutrientesPorCacaca(double nutrientesPorCacaca) {
-        this.nutrientesPorCacaca = nutrientesPorCacaca;
-    }
-
-    public double getCustoEnergiaReproducao() {
-        return custoEnergiaReproducao;
+    public void setEnergiaMinimaReproducao(double energiaMinimaReproducao) {
+        this.energiaMinimaReproducao = energiaMinimaReproducao;
     }
 
     public void setCustoEnergiaReproducao(double custoEnergiaReproducao) {
         this.custoEnergiaReproducao = custoEnergiaReproducao;
     }
 
-    public double getEnergiaMinimaReproducao() {
-        return energiaMinimaReproducao;
+    public void setEnergiaMaxima(double energiaMaxima) {
+        this.energiaMaxima = energiaMaxima;
     }
 
-    public void setEnergiaMinimaReproducao(double energiaMinimaReproducao) {
-        this.energiaMinimaReproducao = energiaMinimaReproducao;
+    public void setConsumoPlantasPorHerbivoroDia(double consumoPlantasPorHerbivoroDia) {
+        this.consumoPlantasPorHerbivoroDia = consumoPlantasPorHerbivoroDia;
     }
 
-    public double getChanceReproducaoCarnivoro() {
-        return chanceReproducaoCarnivoro;
+    public void setEficienciaEnergiaPorBiomassa(double eficienciaEnergiaPorBiomassa) {
+        this.eficienciaEnergiaPorBiomassa = eficienciaEnergiaPorBiomassa;
+    }
+
+    public void setCustoEnergiaDiarioHerbivoro(double custoEnergiaDiarioHerbivoro) {
+        this.custoEnergiaDiarioHerbivoro = custoEnergiaDiarioHerbivoro;
+    }
+
+    public void setEnergiaInicialHerbivoro(double energiaInicialHerbivoro) {
+        this.energiaInicialHerbivoro = energiaInicialHerbivoro;
+    }
+
+    public void setIdadeMaximaHerbivoro(int idadeMaximaHerbivoro) {
+        this.idadeMaximaHerbivoro = idadeMaximaHerbivoro;
+    }
+
+    public void setChanceReproducaoHerbivo(double chanceReproducaoHerbivo) {
+        this.chanceReproducaoHerbivo = chanceReproducaoHerbivo;
+    }
+
+    public void setCustoEnergiaDiarioCarnivoro(double custoEnergiaDiarioCarnivoro) {
+        this.custoEnergiaDiarioCarnivoro = custoEnergiaDiarioCarnivoro;
+    }
+
+    public void setEnergiaInicialCarnivoro(double energiaInicialCarnivoro) {
+        this.energiaInicialCarnivoro = energiaInicialCarnivoro;
+    }
+
+    public void setIdadeMaximaCarnivoro(int idadeMaximaCarnivoro) {
+        this.idadeMaximaCarnivoro = idadeMaximaCarnivoro;
+    }
+
+    public void setTentativasCacaPorCarnivoroDia(int tentativasCacaPorCarnivoroDia) {
+        this.tentativasCacaPorCarnivoroDia = tentativasCacaPorCarnivoroDia;
+    }
+
+    public void setChanceSucessoCaca(double chanceSucessoCaca) {
+        this.chanceSucessoCaca = chanceSucessoCaca;
+    }
+
+    public void setGanhoEnergiaPorHerbivoro(double ganhoEnergiaPorHerbivoro) {
+        this.ganhoEnergiaPorHerbivoro = ganhoEnergiaPorHerbivoro;
     }
 
     public void setChanceReproducaoCarnivoro(double chanceReproducaoCarnivoro) {
         this.chanceReproducaoCarnivoro = chanceReproducaoCarnivoro;
     }
 
+    public void setTaxaDecomposicaoCarcacas(double taxaDecomposicaoCarcacas) {
+        this.taxaDecomposicaoCarcacas = taxaDecomposicaoCarcacas;
+    }
+
+    public void setNutrientesPorCacaca(double nutrientesPorCacaca) {
+        this.nutrientesPorCacaca = nutrientesPorCacaca;
+    }
+
+    public void setFatorCustoSemComer(double fatorCustoSemComer) {
+        this.fatorCustoSemComer = fatorCustoSemComer;
+    }
+
+    //Getters
+
+
+    public double getTaxaBaseCrescimentoPlantas() {
+        return taxaBaseCrescimentoPlantas;
+    }
+
+    public double getKLimitadorNutrientes() {
+        return KLimitadorNutrientes;
+    }
+
+    public double getCustoNutrientePorPlanta() {
+        return custoNutrientePorPlanta;
+    }
+
+    public double getEnergiaMinimaParaViver() {
+        return energiaMinimaParaViver;
+    }
+
+    public double getEnergiaMinimaReproducao() {
+        return energiaMinimaReproducao;
+    }
+
+    public double getCustoEnergiaReproducao() {
+        return custoEnergiaReproducao;
+    }
+
+    public double getEnergiaMaxima() {
+        return energiaMaxima;
+    }
+
+    public double getConsumoPlantasPorHerbivoroDia() {
+        return consumoPlantasPorHerbivoroDia;
+    }
+
+    public double getEficienciaEnergiaPorBiomassa() {
+        return eficienciaEnergiaPorBiomassa;
+    }
+
+    public double getCustoEnergiaDiarioHerbivoro() {
+        return custoEnergiaDiarioHerbivoro;
+    }
+
+    public double getEnergiaInicialHerbivoro() {
+        return energiaInicialHerbivoro;
+    }
+
+    public int getIdadeMaximaHerbivoro() {
+        return idadeMaximaHerbivoro;
+    }
+
     public double getChanceReproducaoHerbivo() {
         return chanceReproducaoHerbivo;
     }
 
-    public void setChanceReproducaoHerbivo(double chanceReproducaoHerbivo) {
-        this.chanceReproducaoHerbivo = chanceReproducaoHerbivo;
+    public double getCustoEnergiaDiarioCarnivoro() {
+        return custoEnergiaDiarioCarnivoro;
+    }
+
+    public double getEnergiaInicialCarnivoro() {
+        return energiaInicialCarnivoro;
+    }
+
+    public int getIdadeMaximaCarnivoro() {
+        return idadeMaximaCarnivoro;
+    }
+
+    public int getTentativasCacaPorCarnivoroDia() {
+        return tentativasCacaPorCarnivoroDia;
+    }
+
+    public double getChanceSucessoCaca() {
+        return chanceSucessoCaca;
+    }
+
+    public double getGanhoEnergiaPorHerbivoro() {
+        return ganhoEnergiaPorHerbivoro;
+    }
+
+    public double getChanceReproducaoCarnivoro() {
+        return chanceReproducaoCarnivoro;
+    }
+
+    public double getTaxaDecomposicaoCarcacas() {
+        return taxaDecomposicaoCarcacas;
+    }
+
+    public double getNutrientesPorCacaca() {
+        return nutrientesPorCacaca;
+    }
+
+    public double getFatorCustoSemComer() {
+        return fatorCustoSemComer;
     }
 }

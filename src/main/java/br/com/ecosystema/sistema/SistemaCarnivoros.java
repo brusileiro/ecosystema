@@ -28,29 +28,41 @@ public class SistemaCarnivoros implements Sistema {
             c.setIdade(c.getIdade() + 1);
 
             // 2) caça herbívoros
-            int tentativas = parametros.getTentativasCacaPorCarnivoroDia();
+            boolean saciado = c.getEnergia() >= 0.8 * parametros.getEnergiaMaxima();
+            boolean cacouHoje = false;
 
-            for (int i = 0; i < tentativas; i++) {
-                if (herbivoros.isEmpty()) break;
+            if (!saciado) {
+                int tentativas = parametros.getTentativasCacaPorCarnivoroDia();
 
-                if (rng.nextDouble() < parametros.getChanceSucessoCaca()) {
-                    // remove um herbívoro aleatório (presa)
-                    int idx = rng.nextInt(herbivoros.size());
-                    herbivoros.remove(idx);
+                for (int i = 0; i < tentativas; i++) {
+                    if (herbivoros.isEmpty()) break;
 
-                    // ganha energia pela caça
-                    c.setEnergia(
-                            c.getEnergia() + parametros.getGanhoEnergiaPorHerbivoro()
-                    );
+                    if (rng.nextDouble() < parametros.getChanceSucessoCaca()) {
+                        // remove um herbívoro aleatório (presa)
+                        int idx = rng.nextInt(herbivoros.size());
+                        herbivoros.remove(idx);
 
-                    // uma caça bem-sucedida já basta no dia
-                    break;
+                        // ganha energia pela caça
+                        c.setEnergia(
+                                c.getEnergia() + parametros.getGanhoEnergiaPorHerbivoro()
+                        );
+
+                        cacouHoje = true;
+
+                        // uma caça bem-sucedida já basta no dia
+                        break;
+                    }
                 }
             }
 
             // 3) custo energético diário
+            double custo = parametros.getCustoEnergiaDiarioCarnivoro();
+            if (!cacouHoje) {
+                custo *= parametros.getFatorCustoSemComer();
+            }
+
             c.setEnergia(
-                    c.getEnergia() - parametros.getCustoEnergiaDiarioCarnivoro()
+                    c.getEnergia() - custo
             );
 
             // Reprodução (herbívoros)
@@ -68,6 +80,10 @@ public class SistemaCarnivoros implements Sistema {
                     nascimentos.add(filhote);
                 }
             }
+
+            c.setEnergia(
+                    Math.min(c.getEnergia(), parametros.getEnergiaMaxima())
+            );
 
             // 4) morte
             boolean morreuPorEnergia =
