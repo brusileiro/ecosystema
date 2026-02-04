@@ -22,12 +22,12 @@ public class Simulacao {
         Sistema decomposicao = new SistemaDecomposicao();
         Mundo mundo = new Mundo();
         Parametros parametros = new Parametros();
-        Random rng = new Random(42);
+        Random rng = new Random(10);
         List<Sistema> sistemas = new ArrayList<>();
         List<Metricas> listaMetricas = new ArrayList<>();
 
         MetricasRecorder recorder = new MetricasRecorder(listaMetricas);
-        int dias = 200;
+        int dias = 500;
 
         sistemas.add(clima);
         sistemas.add(plantas);
@@ -75,7 +75,7 @@ public class Simulacao {
         parametros.setIdadeMaximaCarnivoro(10000);
         parametros.setChanceReproducaoCarnivoro(0.03);
 
-        int quantidadeInicialCarnivoros = 2;
+        int quantidadeInicialCarnivoros = 1;
         for (int i = 0; i < quantidadeInicialCarnivoros; i++) {
             Carnivoro c = new Carnivoro(
                     parametros.getEnergiaInicialHerbivoro(),0
